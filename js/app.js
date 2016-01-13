@@ -36,16 +36,23 @@
   OmnibarController.$inject = ['session'];
 
   function constituentStoreFactory() {
+    var constituent = {
+      id: 1,
+      name: "Bill Murray",
+      image: "http://fillmurray.com/200/200"
+    };
+
     function getConstituent(id) {
-      return {
-        id: 1,
-        name: "Bill Murray",
-        image: "http://fillmurray.com/200/200"
-      };
+      return constituent;
+    }
+
+    function saveConstituent(id, data) {
+      constituent = angular.merge(constituent, data);
     }
 
     return {
-      getConstituent: getConstituent
+      getConstituent: getConstituent,
+      saveConstituent: saveConstituent
     };
   }
 
@@ -64,10 +71,20 @@
   }
   EditConstituentModalController.$inject = ['bbModal'];
 
-  function EditConstituentContentController(constituentStore, constituentId) {
+  function EditConstituentContentController($scope, constituentStore, constituentId) {
     this.constituent = constituentStore.getConstituent(constituentId);
+
+    this.name = this.constituent.name;
+
+    this.save = function() {
+      constituentStore.saveConstituent(constituentId, {
+        name: this.name
+      });
+
+      $scope.$close();
+    }
   }
-  EditConstituentContentController.$inject = ['constituentStore', 'constituentId'];
+  EditConstituentContentController.$inject = ['$scope', 'constituentStore', 'constituentId'];
 
   angular.module('reClone', ['sky'])
     .value('constituentId', 1)
