@@ -104,7 +104,9 @@
       <bb-modal>
         <div class="modal-form">
           <bb-modal-header bb-modal-help-key="'bb-constituent-record.html'">{{ editConstituentVm.constituent.name }}</bb-modal-header>
-          <div bb-modal-body></div>
+          <div bb-modal-body>
+            <input type="text" ng-model="editConstituentVm.constituent.name">
+          </div>
           <bb-modal-footer>
             <bb-modal-footer-button-primary></bb-modal-footer-button-primary>
             <bb-modal-footer-button-cancel></bb-modal-footer-button-cancel>
