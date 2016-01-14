@@ -81,18 +81,36 @@
       </div><!-- /.container-fluid -->
     </bb-navbar>
 
-    <div class="container-fluid row main__container">
+    <div class="container-fluid row main__container" ng-controller="ConstituentController as vm">
       <section class="col-md-9 row">
-        <img src="http://fillmurray.com/200/200" class="col-md-2 img-circle">
-        <h1>Mr. Bill Murray</h1>
+        <img src="{{ vm.constituent.image }}" class="col-md-2 img-circle">
+        <h1>{{ vm.constituent.name }}</h1>
       </section>
       <section class="col-md-3">
         <h4>Constituent codes</h4>
       </section>
+
+      <div class="col-md-12" ng-controller="EditConstituentModalController as modalVm">
+        <button type="button" class="btn btn-primary" ng-click="modalVm.open(vm.constituent.id)">Edit</button>
+      </div>
+
     </div>
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://sky.blackbaudcdn.net/skyux/1.5.1/js/sky-bundle.min.js"></script>
     <script src="js/app.js"></script>
+
+    <script type="text/ng-template" id="constituents/edit.html">
+      <bb-modal>
+        <div class="modal-form">
+          <bb-modal-header bb-modal-help-key="'bb-constituent-record.html'">{{ editConstituentVm.constituent.name }}</bb-modal-header>
+          <div bb-modal-body></div>
+          <bb-modal-footer>
+            <bb-modal-footer-button-primary></bb-modal-footer-button-primary>
+            <bb-modal-footer-button-cancel></bb-modal-footer-button-cancel>
+          </bb-modal-footer>
+        </div>
+      </bb-modal>
+    </script>
   </body>
 </html>
