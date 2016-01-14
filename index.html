@@ -30,7 +30,7 @@
 
   </head>
   <body>
-    <nav class="navbar navbar-static-top omnibar__container">
+    <nav class="navbar navbar-static-top omnibar__container" ng-controller="OmnibarController as vm">
       <div class="container-fluid">
         <ul class="nav navbar-nav">
           <li class="dropdown">
@@ -52,7 +52,8 @@
           </div>
         </form>
         <ul class="nav navbar-nav navbar-right">
-          <li><a class="btn">Login</a></li>
+          <li ng-hide="vm.isAuthenticated()"><a ng-click="vm.authenticate()" class="btn">Login</a></li>
+          <li ng-show="vm.isAuthenticated()"><a ng-click="vm.invalidate()" class="btn">Logout</a></li>
         </ul>
       </div><!-- /.container-fluid -->
     </nav>

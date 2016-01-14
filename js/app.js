@@ -23,6 +23,15 @@
     };
   }
 
+  function OmnibarController(session) {
+    this.authenticate = session.authenticate;
+    this.invalidate = session.invalidate;
+    this.isAuthenticated = session.isAuthenticated;
+  }
+  OmnibarController.$inject = ['session'];
+
+
   angular.module('reClone', ['sky'])
-    .factory('session', sessionFactory);
+    .factory('session', sessionFactory)
+    .controller('OmnibarController', OmnibarController)
 })();
